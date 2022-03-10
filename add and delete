@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body
+        {
+            background-color:aquamarine;
+        }
+        .box{
+            display: flex; 
+            justify-content:space-between;
+            width:700px;
+            margin:0 auto;
+            }
+        .right-box{
+            width:40%;
+        }
+        .right-box input{
+            width:100%;
+            margin:12px 0px;
+            padding:10px;
+        }
+        .left-box{
+            width:40%;
+        }
+        h1{
+            justify-content: center;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    
+<div class="box">
+    <div class="right-box">
+        <h1>Form</h1>
+        <label >FirstName</label>
+        <input type="text" id="fname"autocomplete="off">
+        <label >LastName</label>
+        <input type="text" id="lname"autocomplete="off">
+        <label>Adress City</label>
+        <input type="text" id="ecity"autocomplete="off">
+        <label>Phone number</label>
+        <input type="number" id="enum"autocomplete="off">
+        <button onclick="dataSubmit()">Submit Data</button>
+    </div>
+
+    <div class="left-box">
+        <h1>Record</h1>
+    <span id="msg"></span>
+    </div>
+</div>
+    <SCRIPT SRC="data_add_delete.js"></SCRIPT>
+
+</body>
+</html>
+
+
+----------Java script file----------
+
+
+const  data=[]
+tbl="<table border='1' width='400' ><tr><th>FirstName</th><th>LastName</th><th>City</th><th>Phone No</th><th>Delete</th></tr>";
+function dataSubmit(){
+    let firstname=document.getElementById("fname").value;
+    let lastname=document.getElementById("lname").value;
+    let Empcity=document.getElementById("ecity").value;
+    let Empnumber=document.getElementById("enum").value;
+    if(firstname=="" || !isNaN(firstname))
+    {
+        alert("Please Check The Condtion");
+    }
+    else if(lastname=="" || !isNaN(firstname))
+    {
+        alert("Please Check The Condtion")
+    }
+    else if(Empcity=="")
+    {
+        alert("Please Check The Condtion")
+    }
+    else{
+      const  myobject={firstname:firstname,lastname:lastname, Empcity:Empcity,Empnumber:Empnumber}
+     data.push(myobject)
+     onload()
+    }
+}
+function onload(){
+data.forEach(function(x, i){
+    tbl+=`<tr><th>${x.firstname}</th> <th> ${x.lastname}</th> <th> ${x.Empcity}</th><th> ${x.Empnumber}</th><th><button onclick='deleteList(${i})'>Delete</button></th></tr>`
+})
+document.getElementById("msg").innerHTML=tbl;
+}
+
+function deleteList(value){
+    data.splice(value,1)
+    onload()
+}
